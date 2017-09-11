@@ -1,0 +1,11 @@
+---
+- hosts: all
+
+  roles:
+
+    - environment-core
+    - environment-nodejs
+    - environment-react
+    - environment-openjdk
+    - environment-jenkins
+    - continuous-integration
