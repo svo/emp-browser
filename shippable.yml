@@ -1,0 +1,15 @@
+language: node_js
+
+git:
+  submodules: false
+
+node_js:
+    - 6.11.2
+
+build:
+  pre_ci_boot:
+    image_name: drydock/u14nodall
+    image_tag: v5.8.2
+
+  ci:
+    - ./pre-commit.sh

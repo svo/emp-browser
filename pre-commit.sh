@@ -2,7 +2,7 @@
 
 source bash/common.sh
 
-npm install react-scripts
+npm install
 
 CI=true npm test
 unit=$?
