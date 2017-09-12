@@ -25,6 +25,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     dev.cache.scope = :machine
+
+    dev.vm.provider :virtualbox do |vb|
+      vb.cpus = 2
+      vb.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant", "1"]
+    end
   end
 
   config.vm.define "ci" do |ci|
@@ -40,7 +45,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ci.cache.scope = :machine
 
     ci.vm.provider :virtualbox do |vb|
+      vb.cpus = 2
       vb.memory = 1024
+      vb.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant", "1"]
     end
   end
 end
