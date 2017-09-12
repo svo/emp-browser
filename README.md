@@ -1,6 +1,7 @@
 # EMP Browser
 
 * [Trello Board](https://trello.com/b/WoAzNyra/)
+* [Continuous Integration](https://app.shippable.com/github/svo/emp-browser/dashboard)
 
 __NOTE:__ this project uses git submodules so you will want to clone recursively to have all expected behaviours.
 
