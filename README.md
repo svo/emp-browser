@@ -24,10 +24,13 @@ To perform provisioning and start using the development environment run:
 
 ## Testing the application
 
-1. `vagrant up`
-2. `vagrant ssh`
-3. `cd /vagrant`
-4. `yarn test`
+To monitor tests as you edit the source code run the following from the `/vagrant` directory:
+
+1. `yarn test`
+
+To run tests and generate reports:
+
+`./pre-commit.sh`
 
 ## Running the application
 
