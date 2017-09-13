@@ -1,0 +1,4 @@
+emp:
+  image: svanosselaer/emp:latest
+  ports:
+    - 8080:8080

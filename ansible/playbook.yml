@@ -6,3 +6,15 @@
     - environment-core
     - environment-nodejs
     - environment-react
+    - environment-docker
+    - .
+
+  post_tasks:
+
+    - name: Copy upstart script for docker services
+      copy: src=docker-services.conf dest=/etc/init/ mode=0644
+      become: yes
+
+    - name: Start docker-services
+      service: name=docker-services state=started
+      become: yes

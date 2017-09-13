@@ -7,5 +7,7 @@
     - environment-nodejs
     - environment-react
     - environment-openjdk
+    - environment-docker
     - environment-jenkins
     - continuous-integration
+    - .

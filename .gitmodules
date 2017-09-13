@@ -13,3 +13,6 @@
 [submodule "ansible/roles/environment-react"]
 	path = ansible/roles/environment-react
 	url = git@github.com:svo/environment-react.git
+[submodule "ansible/roles/environment-docker"]
+	path = ansible/roles/environment-docker
+	url = git@github.com:svo/environment-docker.git
