@@ -13,7 +13,7 @@ class App extends Component {
           <h1>EMP</h1>
           <p>Create your payslips conveniently</p>
 
-          <PayslipForm />
+          <PayslipForm year={new Date().getFullYear()} />
         </div>
       </Jumbotron>
     );
