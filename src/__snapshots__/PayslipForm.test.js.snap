@@ -78,7 +78,7 @@ exports[`renders correctly 1`] = `
     </label>
     <select
       className="form-control"
-      defaultValue="APRIL"
+      defaultValue="FEBRUARY"
       id="month"
       placeholder="..."
       type={undefined}
