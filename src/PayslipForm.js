@@ -61,7 +61,8 @@ class PayslipForm extends Component {
         </FormGroup>
         <FormGroup controlId="super_rate">
           <ControlLabel>Super Rate</ControlLabel>
-          <FormControl type="text" placeholder="..." />
+          <FormControl type="text" placeholder="..."
+            defaultValue="9"/>
         </FormGroup>
       </form>
     );

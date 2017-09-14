@@ -156,6 +156,7 @@ exports[`renders correctly 1`] = `
     </label>
     <input
       className="form-control"
+      defaultValue="9"
       id="super_rate"
       placeholder="..."
       type="text"
