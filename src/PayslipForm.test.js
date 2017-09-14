@@ -5,7 +5,7 @@ import renderer from 'react-test-renderer';
 
 it('renders correctly', () => {
   const tree = renderer.create(
-    <PayslipForm year={2017} />
+    <PayslipForm year={2017} month={3} />
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });

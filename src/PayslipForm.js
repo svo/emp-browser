@@ -5,7 +5,19 @@ import PropTypes from 'prop-types';
 class PayslipForm extends Component {
 
   static propTypes = {
-    year: PropTypes.number.isRequired
+    year: PropTypes.number.isRequired,
+    month: PropTypes.number.isRequired
+  }
+
+  constructor(props) {
+    super(props);
+    var date = new Date(this.props.year, this.props.month);
+    var locale = "en-au";
+    var month = date.toLocaleString(locale, { month: "long" });
+
+    this.state = {
+      month: month.toUpperCase()
+    };
   }
 
   render() {
@@ -31,7 +43,8 @@ class PayslipForm extends Component {
         </FormGroup>
         <FormGroup controlId="month">
           <ControlLabel>Month</ControlLabel>
-          <FormControl componentClass="select" placeholder="...">
+          <FormControl componentClass="select" placeholder="..."
+              defaultValue={this.state.month}>
             <option value="JANUARY">January</option>
             <option value="FEBRUARY">February</option>
             <option value="MARCH">March</option>

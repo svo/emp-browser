@@ -7,13 +7,16 @@ import PayslipForm from './PayslipForm';
 
 class App extends Component {
   render() {
+    var now = new Date();
+
     return (
       <Jumbotron>
         <div className='container'>
           <h1>EMP</h1>
           <p>Create your payslips conveniently</p>
 
-          <PayslipForm year={new Date().getFullYear()} />
+          <PayslipForm year={now.getFullYear()}
+            month={now.getMonth()}/>
         </div>
       </Jumbotron>
     );
