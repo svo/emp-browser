@@ -16,13 +16,15 @@ class PayslipForm extends Component {
       first_name: "",
       last_name: "",
       annual_salary: 0,
-      month: this.props.now
+      month: this.props.now,
+      super_rate: 9
     };
 
     this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
     this.handleLastNameChange = this.handleLastNameChange.bind(this);
     this.handleAnnualSalaryChange = this.handleAnnualSalaryChange.bind(this);
     this.handleMonthChange = this.handleMonthChange.bind(this);
+    this.handleSuperRateChange = this.handleSuperRateChange.bind(this);
   }
 
   validFirstName() {
@@ -49,6 +51,20 @@ class PayslipForm extends Component {
     }
   }
 
+  validSuperRate() {
+    var value = parseFloat(this.state.super_rate);
+
+    if (typeof value === 'number' &&
+      isFinite(value) &&
+      value >= 0 &&
+      value <= 50) {
+
+      return 'success';
+    } else {
+      return 'error';
+    }
+  }
+
   handleFirstNameChange(e) {
     this.setState({ first_name: e.target.value });
   }
@@ -63,6 +79,10 @@ class PayslipForm extends Component {
 
   handleMonthChange(e) {
     this.setState({ month: new Date(e.target.value) });
+  }
+
+  handleSuperRateChange(e) {
+    this.setState({ super_rate: e.target.value });
   }
 
   render() {
@@ -98,10 +118,13 @@ class PayslipForm extends Component {
             value={format('yyyy-MM', this.state.month)}
             onChange={this.handleMonthChange} />
         </FormGroup>
-        <FormGroup controlId="super_rate">
+        <FormGroup controlId="super_rate" validationState={this.validSuperRate()}>
           <ControlLabel>Super Rate</ControlLabel>
-          <FormControl type="text" placeholder="..."
-            defaultValue="9"/>
+          <FormControl type="number"
+            placeholder="9"
+            value={this.state.super_rate}
+            onChange={this.handleSuperRateChange} />
+          <FormControl.Feedback />
         </FormGroup>
       </form>
     );

@@ -113,6 +113,15 @@ describe("validation", function() {
       expect(payslipForm.validAnnualSalary()).toEqual('error')
     });
 
+    it('should report invalid annual salary for negative', () => {
+      const div = document.createElement('div');
+
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+      payslipForm.setState({annual_salary: "-1"});
+
+      expect(payslipForm.validAnnualSalary()).toEqual('error')
+    });
+
     it('should report valid annual salary', () => {
       const div = document.createElement('div');
 
@@ -120,6 +129,44 @@ describe("validation", function() {
       payslipForm.setState({annual_salary: "1"});
 
       expect(payslipForm.validAnnualSalary()).toEqual('success')
+    });
+  });
+
+  describe("of super rate", function() {
+    it('should report invalid super rate if not provided', () => {
+      const div = document.createElement('div');
+
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+      payslipForm.setState({super_rate: 51});
+
+      expect(payslipForm.validSuperRate()).toEqual('error')
+    });
+
+    it('should report invalid super rate for negative', () => {
+      const div = document.createElement('div');
+
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+      payslipForm.setState({super_rate: "-1"});
+
+      expect(payslipForm.validSuperRate()).toEqual('error')
+    });
+
+    it('should report valid super rate for 0', () => {
+      const div = document.createElement('div');
+
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+      payslipForm.setState({super_rate: "0"});
+
+      expect(payslipForm.validSuperRate()).toEqual('success')
+    });
+
+    it('should report valid super rate for 50', () => {
+      const div = document.createElement('div');
+
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+      payslipForm.setState({super_rate: "10"});
+
+      expect(payslipForm.validSuperRate()).toEqual('success')
     });
   });
 });

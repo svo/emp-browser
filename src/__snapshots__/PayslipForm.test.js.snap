@@ -83,7 +83,7 @@ exports[`renders correctly 1`] = `
     />
   </div>
   <div
-    className="form-group"
+    className="form-group has-feedback has-success"
   >
     <label
       className="control-label"
@@ -93,10 +93,14 @@ exports[`renders correctly 1`] = `
     </label>
     <input
       className="form-control"
-      defaultValue="9"
       id="super_rate"
-      placeholder="..."
-      type="text"
+      onChange={[Function]}
+      placeholder="9"
+      type="number"
+      value={9}
+    />
+    <span
+      className="form-control-feedback glyphicon glyphicon-ok"
     />
   </div>
 </form>
