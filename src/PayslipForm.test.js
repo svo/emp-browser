@@ -5,31 +5,54 @@ import renderer from 'react-test-renderer';
 
 it('renders correctly', () => {
   const tree = renderer.create(
-    <PayslipForm year={2017} month={1} />
+    <PayslipForm now={new Date()} />
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
 describe("properties", function() {
-  it('should have correct year property', () => {
+  it('should have correct now property', () => {
+    var now = new Date();
     const div = document.createElement('div');
-    var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
-    expect(payslipForm.props.year).toEqual(1976);
-  });
 
-  it('should have correct month property', () => {
-    const div = document.createElement('div');
-    var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
-    expect(payslipForm.props.month).toEqual(3);
-  });
+    var payslipForm = ReactDOM.render(<PayslipForm now={now} />, div);
 
+    expect(payslipForm.props.now).toEqual(now);
+  });
 });
 
 describe("state", function() {
+  it('should have correct first name default', () => {
+    const div = document.createElement('div');
+
+    var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+
+    expect(payslipForm.state.first_name).toEqual("");
+  });
+
+  it('should have correct last name default', () => {
+    const div = document.createElement('div');
+
+    var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+
+    expect(payslipForm.state.last_name).toEqual("");
+  });
+
+  it('should have correct annual salary default', () => {
+    const div = document.createElement('div');
+
+    var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+
+    expect(payslipForm.state.annual_salary).toEqual(0);
+  });
+
   it('should have correct month state', () => {
     const div = document.createElement('div');
-    var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
-    expect(payslipForm.state.month).toEqual("APRIL");
+    var now = new Date();
+
+    var payslipForm = ReactDOM.render(<PayslipForm now={now} />, div);
+
+    expect(payslipForm.state.month).toEqual(now);
   });
 });
 
@@ -37,15 +60,16 @@ describe("validation", function() {
   describe("of first name", function() {
     it('should report invalid first name', () => {
       const div = document.createElement('div');
-      var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
+
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
 
       expect(payslipForm.validFirstName()).toEqual('error')
     });
 
     it('should report valid first name', () => {
       const div = document.createElement('div');
-      var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
 
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
       payslipForm.setState({first_name: "Sean"});
 
       expect(payslipForm.validFirstName()).toEqual('success')
@@ -55,15 +79,16 @@ describe("validation", function() {
   describe("of last name", function() {
     it('should report invalid last name', () => {
       const div = document.createElement('div');
-      var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
+
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
 
       expect(payslipForm.validLastName()).toEqual('error')
     });
 
     it('should report valid last name', () => {
       const div = document.createElement('div');
-      var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
 
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
       payslipForm.setState({last_name: "Van Osselaer"});
 
       expect(payslipForm.validLastName()).toEqual('success')
@@ -73,15 +98,16 @@ describe("validation", function() {
   describe("of annual salary", function() {
     it('should report invalid annual salary if not provided', () => {
       const div = document.createElement('div');
-      var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
+
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
 
       expect(payslipForm.validAnnualSalary()).toEqual('error')
     });
 
     it('should report invalid annual salary for decimal values', () => {
       const div = document.createElement('div');
-      var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
 
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
       payslipForm.setState({annual_salary: "1.01"});
 
       expect(payslipForm.validAnnualSalary()).toEqual('error')
@@ -89,8 +115,8 @@ describe("validation", function() {
 
     it('should report valid annual salary', () => {
       const div = document.createElement('div');
-      var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
 
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
       payslipForm.setState({annual_salary: "1"});
 
       expect(payslipForm.validAnnualSalary()).toEqual('success')

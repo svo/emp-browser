@@ -1,31 +1,28 @@
 import React, { Component } from 'react';
 import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import format from 'date-format';
 
 class PayslipForm extends Component {
 
   static propTypes = {
-    year: PropTypes.number.isRequired,
-    month: PropTypes.number.isRequired
+    now: PropTypes.object.isRequired
   }
 
   constructor(props) {
     super(props);
 
-    var date = new Date(this.props.year, this.props.month);
-    var locale = "en-au";
-    var month = date.toLocaleString(locale, { month: "long" });
-
     this.state = {
-      month: month.toUpperCase(),
       first_name: "",
       last_name: "",
-      annual_salary: 0
+      annual_salary: 0,
+      month: this.props.now
     };
 
     this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
     this.handleLastNameChange = this.handleLastNameChange.bind(this);
     this.handleAnnualSalaryChange = this.handleAnnualSalaryChange.bind(this);
+    this.handleMonthChange = this.handleMonthChange.bind(this);
   }
 
   validFirstName() {
@@ -64,6 +61,10 @@ class PayslipForm extends Component {
     this.setState({ annual_salary: e.target.value });
   }
 
+  handleMonthChange(e) {
+    this.setState({ month: new Date(e.target.value) });
+  }
+
   render() {
     return (
       <form>
@@ -93,27 +94,9 @@ class PayslipForm extends Component {
         </FormGroup>
         <FormGroup controlId="year">
           <ControlLabel>Year</ControlLabel>
-          <FormControl type="text"
-                       defaultValue={this.props.year}
-                       placeholder={this.props.year} />
-        </FormGroup>
-        <FormGroup controlId="month">
-          <ControlLabel>Month</ControlLabel>
-          <FormControl componentClass="select" placeholder="..."
-              defaultValue={this.state.month}>
-            <option value="JANUARY">January</option>
-            <option value="FEBRUARY">February</option>
-            <option value="MARCH">March</option>
-            <option value="APRIL">April</option>
-            <option value="MAY">May</option>
-            <option value="JUNE">June</option>
-            <option value="JULY">July</option>
-            <option value="AUGUST">August</option>
-            <option value="SEPTEMBER">September</option>
-            <option value="OCTOBER">October</option>
-            <option value="NOVEMBER">November</option>
-            <option value="DECEMBER">December</option>
-          </FormControl>
+          <FormControl type="month"
+            value={format('yyyy-MM', this.state.month)}
+            onChange={this.handleMonthChange} />
         </FormGroup>
         <FormGroup controlId="super_rate">
           <ControlLabel>Super Rate</ControlLabel>

@@ -76,89 +76,11 @@ exports[`renders correctly 1`] = `
     </label>
     <input
       className="form-control"
-      defaultValue={2017}
       id="year"
-      placeholder={2017}
-      type="text"
+      onChange={[Function]}
+      type="month"
+      value="2017-09"
     />
-  </div>
-  <div
-    className="form-group"
-  >
-    <label
-      className="control-label"
-      htmlFor="month"
-    >
-      Month
-    </label>
-    <select
-      className="form-control"
-      defaultValue="FEBRUARY"
-      id="month"
-      placeholder="..."
-      type={undefined}
-    >
-      <option
-        value="JANUARY"
-      >
-        January
-      </option>
-      <option
-        value="FEBRUARY"
-      >
-        February
-      </option>
-      <option
-        value="MARCH"
-      >
-        March
-      </option>
-      <option
-        value="APRIL"
-      >
-        April
-      </option>
-      <option
-        value="MAY"
-      >
-        May
-      </option>
-      <option
-        value="JUNE"
-      >
-        June
-      </option>
-      <option
-        value="JULY"
-      >
-        July
-      </option>
-      <option
-        value="AUGUST"
-      >
-        August
-      </option>
-      <option
-        value="SEPTEMBER"
-      >
-        September
-      </option>
-      <option
-        value="OCTOBER"
-      >
-        October
-      </option>
-      <option
-        value="NOVEMBER"
-      >
-        November
-      </option>
-      <option
-        value="DECEMBER"
-      >
-        December
-      </option>
-    </select>
   </div>
   <div
     className="form-group"
