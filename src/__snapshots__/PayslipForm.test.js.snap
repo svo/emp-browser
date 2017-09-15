@@ -45,7 +45,7 @@ exports[`renders correctly 1`] = `
     />
   </div>
   <div
-    className="form-group"
+    className="form-group has-feedback has-error"
   >
     <label
       className="control-label"
@@ -56,8 +56,13 @@ exports[`renders correctly 1`] = `
     <input
       className="form-control"
       id="annual_salary"
+      onChange={[Function]}
       placeholder="175000"
-      type="text"
+      type="number"
+      value={0}
+    />
+    <span
+      className="form-control-feedback glyphicon glyphicon-remove"
     />
   </div>
   <div

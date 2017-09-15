@@ -69,4 +69,31 @@ describe("validation", function() {
       expect(payslipForm.validLastName()).toEqual('success')
     });
   });
+
+  describe("of annual salary", function() {
+    it('should report invalid annual salary if not provided', () => {
+      const div = document.createElement('div');
+      var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
+
+      expect(payslipForm.validAnnualSalary()).toEqual('error')
+    });
+
+    it('should report invalid annual salary for decimal values', () => {
+      const div = document.createElement('div');
+      var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
+
+      payslipForm.setState({annual_salary: "1.01"});
+
+      expect(payslipForm.validAnnualSalary()).toEqual('error')
+    });
+
+    it('should report valid annual salary', () => {
+      const div = document.createElement('div');
+      var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
+
+      payslipForm.setState({annual_salary: "1"});
+
+      expect(payslipForm.validAnnualSalary()).toEqual('success')
+    });
+  });
 });

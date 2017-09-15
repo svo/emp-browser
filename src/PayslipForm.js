@@ -19,11 +19,13 @@ class PayslipForm extends Component {
     this.state = {
       month: month.toUpperCase(),
       first_name: "",
-      last_name: ""
+      last_name: "",
+      annual_salary: 0
     };
 
     this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
     this.handleLastNameChange = this.handleLastNameChange.bind(this);
+    this.handleAnnualSalaryChange = this.handleAnnualSalaryChange.bind(this);
   }
 
   validFirstName() {
@@ -36,12 +38,30 @@ class PayslipForm extends Component {
     return (length > 0) ? 'success' : 'error';
   }
 
+  validAnnualSalary() {
+    var value = parseFloat(this.state.annual_salary);
+
+    if (typeof value === 'number' &&
+      isFinite(value) &&
+      Math.floor(value) === value &&
+      value > 0) {
+
+      return 'success';
+    } else {
+      return 'error';
+    }
+  }
+
   handleFirstNameChange(e) {
     this.setState({ first_name: e.target.value });
   }
 
   handleLastNameChange(e) {
     this.setState({ last_name: e.target.value });
+  }
+
+  handleAnnualSalaryChange(e) {
+    this.setState({ annual_salary: e.target.value });
   }
 
   render() {
@@ -63,9 +83,13 @@ class PayslipForm extends Component {
             onChange={this.handleLastNameChange} />
           <FormControl.Feedback />
         </FormGroup>
-        <FormGroup controlId="annual_salary">
+        <FormGroup controlId="annual_salary" validationState={this.validAnnualSalary()}>
           <ControlLabel>Annual Salary</ControlLabel>
-          <FormControl type="text" placeholder="175000" />
+          <FormControl type="number"
+            placeholder="175000"
+            value={this.state.annual_salary}
+            onChange={this.handleAnnualSalaryChange} />
+          <FormControl.Feedback />
         </FormGroup>
         <FormGroup controlId="year">
           <ControlLabel>Year</ControlLabel>
