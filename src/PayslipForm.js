@@ -11,21 +11,38 @@ class PayslipForm extends Component {
 
   constructor(props) {
     super(props);
+
     var date = new Date(this.props.year, this.props.month);
     var locale = "en-au";
     var month = date.toLocaleString(locale, { month: "long" });
 
     this.state = {
-      month: month.toUpperCase()
+      month: month.toUpperCase(),
+      first_name: ""
     };
+
+    this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
+  }
+
+  validFirstName() {
+    const length = this.state.first_name.length;
+    return (length > 0) ? 'success' : 'error';
+  }
+
+  handleFirstNameChange(e) {
+    this.setState({ first_name: e.target.value });
   }
 
   render() {
     return (
       <form>
-        <FormGroup controlId="first_name">
+        <FormGroup controlId="first_name" validationState={this.validFirstName()}>
           <ControlLabel>First Name</ControlLabel>
-          <FormControl type="text" placeholder="Sean" />
+          <FormControl type="text"
+            placeholder="Sean"
+            value={this.state.first_name}
+            onChange={this.handleFirstNameChange} />
+          <FormControl.Feedback />
         </FormGroup>
         <FormGroup controlId="last_name">
           <ControlLabel>Last Name</ControlLabel>

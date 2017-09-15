@@ -10,20 +10,43 @@ it('renders correctly', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('should have correct year property', () => {
-  const div = document.createElement('div');
-  var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
-  expect(payslipForm.props.year).toEqual(1976);
+describe("properties", function() {
+  it('should have correct year property', () => {
+    const div = document.createElement('div');
+    var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
+    expect(payslipForm.props.year).toEqual(1976);
+  });
+
+  it('should have correct month property', () => {
+    const div = document.createElement('div');
+    var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
+    expect(payslipForm.props.month).toEqual(3);
+  });
+
 });
 
-it('should have correct month property', () => {
-  const div = document.createElement('div');
-  var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
-  expect(payslipForm.props.month).toEqual(3);
+describe("state", function() {
+  it('should have correct month state', () => {
+    const div = document.createElement('div');
+    var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
+    expect(payslipForm.state.month).toEqual("APRIL");
+  });
 });
 
-it('should have correct month state', () => {
-  const div = document.createElement('div');
-  var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
-  expect(payslipForm.state.month).toEqual("APRIL");
+describe("validation", function() {
+  it('should report invalid first name', () => {
+    const div = document.createElement('div');
+    var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
+
+    expect(payslipForm.validFirstName()).toEqual('error')
+  });
+
+  it('should report valid first name', () => {
+    const div = document.createElement('div');
+    var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
+
+    payslipForm.setState({first_name: "Sean"});
+
+    expect(payslipForm.validFirstName()).toEqual('success')
+  });
 });

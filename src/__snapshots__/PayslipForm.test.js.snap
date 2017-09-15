@@ -3,7 +3,7 @@
 exports[`renders correctly 1`] = `
 <form>
   <div
-    className="form-group"
+    className="form-group has-feedback has-error"
   >
     <label
       className="control-label"
@@ -14,8 +14,13 @@ exports[`renders correctly 1`] = `
     <input
       className="form-control"
       id="first_name"
+      onChange={[Function]}
       placeholder="Sean"
       type="text"
+      value=""
+    />
+    <span
+      className="form-control-feedback glyphicon glyphicon-remove"
     />
   </div>
   <div
