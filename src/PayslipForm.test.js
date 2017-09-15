@@ -34,19 +34,39 @@ describe("state", function() {
 });
 
 describe("validation", function() {
-  it('should report invalid first name', () => {
-    const div = document.createElement('div');
-    var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
+  describe("of first name", function() {
+    it('should report invalid first name', () => {
+      const div = document.createElement('div');
+      var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
 
-    expect(payslipForm.validFirstName()).toEqual('error')
+      expect(payslipForm.validFirstName()).toEqual('error')
+    });
+
+    it('should report valid first name', () => {
+      const div = document.createElement('div');
+      var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
+
+      payslipForm.setState({first_name: "Sean"});
+
+      expect(payslipForm.validFirstName()).toEqual('success')
+    });
   });
 
-  it('should report valid first name', () => {
-    const div = document.createElement('div');
-    var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
+  describe("of last name", function() {
+    it('should report invalid last name', () => {
+      const div = document.createElement('div');
+      var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
 
-    payslipForm.setState({first_name: "Sean"});
+      expect(payslipForm.validLastName()).toEqual('error')
+    });
 
-    expect(payslipForm.validFirstName()).toEqual('success')
+    it('should report valid last name', () => {
+      const div = document.createElement('div');
+      var payslipForm = ReactDOM.render(<PayslipForm year={1976} month={3} />, div);
+
+      payslipForm.setState({last_name: "Van Osselaer"});
+
+      expect(payslipForm.validLastName()).toEqual('success')
+    });
   });
 });

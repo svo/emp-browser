@@ -18,10 +18,12 @@ class PayslipForm extends Component {
 
     this.state = {
       month: month.toUpperCase(),
-      first_name: ""
+      first_name: "",
+      last_name: ""
     };
 
     this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
+    this.handleLastNameChange = this.handleLastNameChange.bind(this);
   }
 
   validFirstName() {
@@ -29,8 +31,17 @@ class PayslipForm extends Component {
     return (length > 0) ? 'success' : 'error';
   }
 
+  validLastName() {
+    const length = this.state.last_name.length;
+    return (length > 0) ? 'success' : 'error';
+  }
+
   handleFirstNameChange(e) {
     this.setState({ first_name: e.target.value });
+  }
+
+  handleLastNameChange(e) {
+    this.setState({ last_name: e.target.value });
   }
 
   render() {
@@ -44,9 +55,13 @@ class PayslipForm extends Component {
             onChange={this.handleFirstNameChange} />
           <FormControl.Feedback />
         </FormGroup>
-        <FormGroup controlId="last_name">
+        <FormGroup controlId="last_name" validationState={this.validLastName()}>
           <ControlLabel>Last Name</ControlLabel>
-          <FormControl type="text" placeholder="Van Osselaer" />
+          <FormControl type="text"
+            placeholder="Van Osselaer"
+            value={this.state.last_name}
+            onChange={this.handleLastNameChange} />
+          <FormControl.Feedback />
         </FormGroup>
         <FormGroup controlId="annual_salary">
           <ControlLabel>Annual Salary</ControlLabel>
