@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import format from 'date-format';
+import PayslipActions from '../actions/PayslipActions';
+import PayslipStore from '../stores/PayslipStore';
 
 class PayslipForm extends Component {
 
@@ -25,6 +27,24 @@ class PayslipForm extends Component {
     this.handleAnnualSalaryChange = this.handleAnnualSalaryChange.bind(this);
     this.handleMonthChange = this.handleMonthChange.bind(this);
     this.handleSuperRateChange = this.handleSuperRateChange.bind(this);
+    this.handleCreateClick = this.handleCreateClick.bind(this);
+    this.onChange = this.onChange.bind(this);
+  }
+
+  getInitialState() {
+    return PayslipStore.getState();
+  }
+
+  componentDidMount() {
+    PayslipStore.listen(this.onChange);
+  }
+
+  componentWillUnmount() {
+    PayslipStore.unlisten(this.onChange);
+  }
+
+  onChange(state) {
+    this.setState(state);
   }
 
   validFirstName() {
@@ -85,6 +105,10 @@ class PayslipForm extends Component {
     this.setState({ super_rate: e.target.value });
   }
 
+  handleCreateClick() {
+    PayslipActions.create(this.state);
+  }
+
   render() {
     return (
       <form>
@@ -126,6 +150,9 @@ class PayslipForm extends Component {
             onChange={this.handleSuperRateChange} />
           <FormControl.Feedback />
         </FormGroup>
+        <Button bsStyle="primary" onClick={this.handleCreateClick}>
+          Create
+        </Button>
       </form>
     );
   }

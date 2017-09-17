@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PayslipForm from './PayslipForm';
+import PayslipActions from '../actions/PayslipActions';
 import renderer from 'react-test-renderer';
 
 it('renders correctly', () => {
@@ -168,5 +169,24 @@ describe("validation", function() {
 
       expect(payslipForm.validSuperRate()).toEqual('success')
     });
+  });
+});
+
+describe("on create", function() {
+  it('should call create action', () => {
+    const mockAction = jest.fn();
+    const state = {annual_salary: 175000,
+      first_name: "Sean",
+      last_name: "Van Osselaer",
+      month: new Date(),
+      super_rate: 9};
+    var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />,
+      document.createElement('div'));
+    PayslipActions.create = mockAction;
+    payslipForm.setState(state);
+
+    payslipForm.handleCreateClick();
+
+    expect(mockAction).toBeCalledWith(state);
   });
 });
