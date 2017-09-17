@@ -3,7 +3,7 @@ import './App.css';
 import { Jumbotron } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
-import PayslipForm from './PayslipForm';
+import PayslipForm from './components/PayslipForm';
 
 class App extends Component {
   render() {
