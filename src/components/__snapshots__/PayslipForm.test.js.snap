@@ -103,13 +103,25 @@ exports[`renders correctly 1`] = `
       className="form-control-feedback glyphicon glyphicon-ok"
     />
   </div>
-  <button
-    className="btn btn-primary"
-    disabled={false}
-    onClick={[Function]}
-    type="button"
+  <div
+    className="btn-group"
   >
-    Create
-  </button>
+    <button
+      className="btn btn-primary"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Create
+    </button>
+    <button
+      className="btn btn-success"
+      disabled={true}
+      href={undefined}
+      type="button"
+    >
+      Download
+    </button>
+  </div>
 </form>
 `;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Button, ButtonGroup } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import format from 'date-format';
 import PayslipActions from '../actions/PayslipActions';
@@ -150,9 +150,15 @@ class PayslipForm extends Component {
             onChange={this.handleSuperRateChange} />
           <FormControl.Feedback />
         </FormGroup>
-        <Button bsStyle="primary" onClick={this.handleCreateClick}>
-          Create
-        </Button>
+        <ButtonGroup>
+          <Button bsStyle="primary" onClick={this.handleCreateClick}>
+            Create
+          </Button>
+          <Button bsStyle="success" href={this.state.location}
+            disabled={this.state.location === undefined}>
+            Download
+          </Button>
+        </ButtonGroup>
       </form>
     );
   }
