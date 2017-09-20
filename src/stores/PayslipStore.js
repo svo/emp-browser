@@ -1,21 +1,28 @@
 import alt from '../alt';
+import { PayslipSource } from '../sources/PayslipSource';
 import PayslipActions from '../actions/PayslipActions';
 
 export class PayslipStore {
   constructor() {
-    this.location = undefined;
+    this.payslip = undefined;
 
     try {
+      this.registerAsync(PayslipSource);
       this.bindListeners({
-        create: PayslipActions.CREATE
+        create: PayslipActions.CREATE,
+        created: PayslipActions.PAYSLIP_CREATED
       });
     } catch (e) {
-      console.log("unable to bind listeners");
     }
   }
 
-  create(location) {
-    this.location = location;
+  create(payslip) {
+    this.payslip = payslip;
+    this.getInstance().createPayslip();
+  }
+
+  created(location) {
+    this.payslip.location = location;
   }
 }
 

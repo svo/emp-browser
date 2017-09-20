@@ -44,7 +44,7 @@ class PayslipForm extends Component {
   }
 
   onChange(state) {
-    this.setState(state);
+    this.setState({location: state.payslip.location});
   }
 
   validFirstName() {

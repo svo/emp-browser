@@ -1,4 +1,3 @@
-import axios from 'axios';
 import names from 'date-names';
 import alt from '../alt';
 
@@ -13,14 +12,14 @@ class PayslipActions {
   }
 
   create(details) {
-    axios.post('/payslip', this.createPayload(details))
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    return "/";
+    return this.createPayload(details);
+  }
+
+  payslipCreated(response) {
+    return response.headers.location;
+  }
+
+  payslipCreateFailed(error) {
   }
 }
 

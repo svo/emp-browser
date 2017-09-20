@@ -26,9 +26,20 @@ it('should create', () => {
     "month": "APRIL",
     "super_rate": 9
   }
-
   const createPayload = jest.fn();
   createPayload.mockReturnValue(details)
   PayslipActions.createPayload = createPayload;
-  expect(PayslipActions.create(details)).toEqual("/");
+
+  expect(PayslipActions.create(details)).toEqual(details);
+})
+
+it('should extract location from created payslip response', () => {
+  var location = '/payslip/bob';
+  var response = {
+    headers: {
+      location: location
+    }
+  };
+
+  expect(PayslipActions.payslipCreated(response)).toEqual(location);
 });
