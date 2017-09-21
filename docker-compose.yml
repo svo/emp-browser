@@ -2,3 +2,10 @@ emp:
   image: svanosselaer/emp:latest
   ports:
     - 8080:8080
+
+emp-browser:
+  image: svanosselaer/emp-browser:latest
+  ports:
+    - 80:80
+  links:
+    - emp

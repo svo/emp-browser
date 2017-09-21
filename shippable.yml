@@ -13,3 +13,16 @@ build:
 
   ci:
     - ./pre-commit.sh
+
+  post_ci:
+    - ./build.sh
+    - docker build -t svanosselaer/emp-browser:latest .
+    - docker push svanosselaer/emp-browser:latest
+
+integrations:
+  hub:
+    - integrationName: hub.docker.com
+      type: docker
+      branches:
+        only:
+          - master
