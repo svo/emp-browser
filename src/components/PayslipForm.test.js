@@ -58,6 +58,73 @@ describe("state", function() {
 });
 
 describe("validation", function() {
+  it("should be valid", () => {
+      const div = document.createElement('div');
+
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+
+      payslipForm.setState({super_rate: 9,
+        annual_salary: 175000,
+        first_name: "Sean",
+        last_name: "Van Osselaer"});
+
+      expect(payslipForm.valid()).toEqual(true);
+  });
+
+  it("should be invalid if super rate invalid", () => {
+      const div = document.createElement('div');
+
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+
+      const validSuper = jest.fn();
+      validSuper.mockReturnValue('error');
+      payslipForm.validSuperRate = validSuper;
+
+      expect(payslipForm.valid()).toEqual(false);
+  });
+
+  it("should be invalid if annual salary invalid", () => {
+      const div = document.createElement('div');
+
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+
+      payslipForm.setState({super_rate: 9});
+      const validAnnualSalary = jest.fn();
+      validAnnualSalary.mockReturnValue('error');
+      payslipForm.validAnnualSalary = validAnnualSalary;
+
+      expect(payslipForm.valid()).toEqual(false);
+  });
+
+  it("should be invalid if first name invalid", () => {
+      const div = document.createElement('div');
+
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+
+      payslipForm.setState({super_rate: 9,
+        annual_salary: 175000});
+      const validFirstName = jest.fn();
+      validFirstName.mockReturnValue('error');
+      payslipForm.validFirstName = validFirstName;
+
+      expect(payslipForm.valid()).toEqual(false);
+  });
+
+  it("should be invalid if last name invalid", () => {
+      const div = document.createElement('div');
+
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+
+      payslipForm.setState({super_rate: 9,
+        annual_salary: 175000,
+        first_name: "Sean"});
+      const validLastName = jest.fn();
+      validLastName.mockReturnValue('error');
+      payslipForm.validLastName = validLastName;
+
+      expect(payslipForm.valid()).toEqual(false);
+  });
+
   describe("of first name", function() {
     it('should report invalid first name', () => {
       const div = document.createElement('div');

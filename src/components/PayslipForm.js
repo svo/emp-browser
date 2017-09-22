@@ -85,6 +85,13 @@ class PayslipForm extends Component {
     }
   }
 
+  valid() {
+    return this.validSuperRate() === 'success' &&
+      this.validAnnualSalary() === 'success' &&
+      this.validFirstName() === 'success' &&
+      this.validLastName() === 'success';
+  }
+
   handleFirstNameChange(e) {
     this.setState({ first_name: e.target.value });
   }
