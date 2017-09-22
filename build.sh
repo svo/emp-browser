@@ -7,6 +7,7 @@ npm install
 sed -i 's/-odgn\.3//g' package.json
 sed -i 's/odgn-//g' package.json
 sed -i 's/odgn-//g' src/alt.js
+npm install
 yarn build
 build=$?
 echo_result "Build" $build
