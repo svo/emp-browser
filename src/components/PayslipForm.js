@@ -158,7 +158,8 @@ class PayslipForm extends Component {
           <FormControl.Feedback />
         </FormGroup>
         <ButtonGroup>
-          <Button bsStyle="primary" onClick={this.handleCreateClick}>
+          <Button bsStyle="primary" onClick={this.handleCreateClick}
+            disabled={!this.valid()}>
             Create
           </Button>
           <Button bsStyle="success" href={this.state.location}
