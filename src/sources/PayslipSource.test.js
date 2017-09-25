@@ -8,29 +8,57 @@ describe("create payslip", function() {
     expect(PayslipSource.createPayslip.shouldFetch({})).toEqual(true);
   });
 
-  it('should adhere to contract', () => {
-    var payslip = {
-      "first_name": "Sean",
-      "last_name": "Van Osselaer",
-      "annual_salary": 175000,
-      "year": 2017,
-      "month": "APRIL",
-      "super_rate": 9
-    };
-    var url = 'http://localhost:8081/payslip';
-    var options = {
-        method: 'post',
-        body: payslip,
-        json: true,
-        url: url
-    };
+  describe("contract", function() {
+    it('should have created resonse status', () => {
+      var payslip = {
+        "first_name": "Sean",
+        "last_name": "Van Osselaer",
+        "annual_salary": 175000,
+        "year": 2017,
+        "month": "APRIL",
+        "super_rate": 9
+      };
+      var url = 'http://localhost:8081/payslip';
+      var options = {
+          method: 'post',
+          body: payslip,
+          json: true,
+          url: url
+      };
 
-    request(options, function (error, response, body) {
-      if (error) {
-        fail();
-      } else {
-        expect(response.statusCode).toEqual(201);
-      }
+      request(options, function (error, response, body) {
+        if (error) {
+          fail();
+        } else {
+          expect(response.statusCode).toEqual(201);
+        }
+      });
+    });
+
+    it('should have location header', () => {
+      var payslip = {
+        "first_name": "Sean",
+        "last_name": "Van Osselaer",
+        "annual_salary": 175000,
+        "year": 2017,
+        "month": "APRIL",
+        "super_rate": 9
+      };
+      var url = 'http://localhost:8081/payslip';
+      var options = {
+          method: 'post',
+          body: payslip,
+          json: true,
+          url: url
+      };
+
+      request(options, function (error, response, body) {
+        if (error) {
+          fail();
+        } else {
+          expect(response.headers.location).toEqual('/payslip/{payslip_id}');;
+        }
+      });
     });
   });
 
