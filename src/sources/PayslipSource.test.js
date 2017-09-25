@@ -56,7 +56,7 @@ describe("create payslip", function() {
         if (error) {
           fail();
         } else {
-          expect(response.headers.location).toEqual('/payslip/{payslip_id}');;
+          expect(response.headers.location).toEqual('/payslip/{payslip_id}');
         }
       });
     });
