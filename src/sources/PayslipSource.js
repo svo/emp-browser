@@ -4,7 +4,7 @@ import PayslipActions from '../actions/PayslipActions';
 export const PayslipSource = {
   createPayslip: {
     remote(state) {
-      return axios.post('/payslip', state.payslip)
+      return axios.post('/payslip', state.payslip);
     },
 
     success: PayslipActions.payslipCreated,

@@ -12,6 +12,7 @@ build:
     image_tag: v5.8.2
 
   ci:
+    - npm install -g osprey-mock-service@0.2.1
     - ./pre-commit.sh
 
   post_ci:
