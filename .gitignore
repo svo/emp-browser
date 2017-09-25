@@ -8,6 +8,7 @@
 .*.swo
 *.tmp
 *.bak
+*.raml
 
 # OS X
 .DS_Store

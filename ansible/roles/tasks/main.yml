@@ -11,9 +11,3 @@
       notify:
       - Restart docker
       become: yes
-
-    - name: Install global NPM packages
-      npm: name={{ item.name }} version={{ item.version }} global=yes
-      become: yes
-      with_items:
-      - {name: osprey-mock-service, version: 0.2.1}

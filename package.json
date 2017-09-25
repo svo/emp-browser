@@ -18,10 +18,11 @@
   },
   "devDependencies": {
     "react-test-renderer": "15.6.1",
-    "request": "2.82.0"
+    "request": "2.82.0",
+    "osprey-mock-service": "0.2.1"
   },
   "scripts": {
-    "pretest" : "wget https://raw.githubusercontent.com/svo/emp-contract/master/api.raml && osprey-mock-service -f api.raml -p 8081 &",
+    "pretest" : "wget https://raw.githubusercontent.com/svo/emp-contract/master/api.raml && ./node_modules/osprey-mock-service/bin/osprey-mock-service.js -f api.raml -p 8081 &",
     "posttest" : "rm api.raml && ps -elf | grep osprey-mock-service | grep -v grep | awk '{print $4}' | xargs kill",
     "start": "react-scripts start",
     "build": "react-scripts build",
