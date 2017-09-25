@@ -19,7 +19,7 @@
   "devDependencies": {
     "react-test-renderer": "15.6.1",
     "request": "2.82.0",
-    "osprey-mock-service": "mulesoft-labs/osprey-mock-service#develop"
+    "osprey-mock-service": "mulesoft-labs/osprey-mock-service#7a490e5bb8122bf6067479781649a1a8a54d4e1d"
   },
   "scripts": {
     "pretest" : "wget -O api.raml https://raw.githubusercontent.com/svo/emp-contract/master/api.raml && ./node_modules/osprey-mock-service/bin/osprey-mock-service.js -f api.raml -p 8081 &",
