@@ -47,7 +47,7 @@ Navigate to [vagrant-emp-browser.local:3000](http://vagrant-emp-browser.local:30
 1. `vagrant up`
 2. `vagrant ssh`
 3. `cd /vagrant`
-4. `yarn build`
+4. `./build.sh`
 
 ## Local Continuous Integration
 
