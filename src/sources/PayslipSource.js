@@ -13,5 +13,20 @@ export const PayslipSource = {
     shouldFetch(state) {
       return true;
     }
+  },
+
+  downloadPayslip: {
+    remote(state) {
+      return axios({url: state.location,
+        method: 'get',
+        responseType: 'blob'});
+    },
+
+    success: PayslipActions.payslipDownloaded,
+    error: PayslipActions.payslipDownloadFailed,
+
+    shouldFetch(state) {
+      return true;
+    }
   }
 };

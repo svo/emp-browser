@@ -74,3 +74,55 @@ describe("create payslip", function() {
     });
   });
 });
+
+describe("download payslip", function() {
+  it('should be set to fetch', () => {
+    expect(PayslipSource.downloadPayslip.shouldFetch({})).toEqual(true);
+  });
+
+  describe("contract", function() {
+    it('should have ok resonse status', () => {
+      var url = 'http://localhost:8081/payslip/1fc61616-eae4-4fe0-a6a3-5d51fb7dca81';
+      var options = {
+          method: 'get',
+          url: url
+      };
+
+      request(options, function (error, response, body) {
+        if (error) {
+          fail();
+        } else {
+          expect(response.statusCode).toEqual(200);
+        }
+      });
+    });
+
+    it('should have file response', () => {
+      var url = 'http://localhost:8081/payslip/1fc61616-eae4-4fe0-a6a3-5d51fb7dca81';
+      var options = {
+          method: 'get',
+          url: url
+      };
+
+      request(options, function (error, response, body) {
+        if (error) {
+          fail();
+        } else {
+          expect(response.headers['content-type']).toEqual('application/octet-stream');
+        }
+      });
+    });
+  });
+
+  it('should download remote resource', () => {
+    var location = '/payslip/1fc61616-eae4-4fe0-a6a3-5d51fb7dca81';
+    var state = {location: location};
+    var body = 'coconuts';
+    var mockAxios = new MockAdapter(axios);
+    mockAxios.onGet(location).reply(200, body);
+
+    PayslipSource.downloadPayslip.remote(state).then(function(response) {
+      expect(response.data).toEqual(body);
+    });
+  });
+});

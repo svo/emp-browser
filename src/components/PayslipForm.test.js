@@ -257,3 +257,35 @@ describe("on create", function() {
     expect(mockAction).toBeCalledWith(state);
   });
 });
+
+describe("on download", function() {
+  it('should call download action', () => {
+    const mockAction = jest.fn();
+    const state = {annual_salary: 175000,
+      first_name: "Sean",
+      last_name: "Van Osselaer",
+      month: new Date(),
+      super_rate: 9,
+      location: "/coconuts"};
+    var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />,
+      document.createElement('div'));
+    PayslipActions.download = mockAction;
+    payslipForm.setState(state);
+
+    payslipForm.handleDownloadClick();
+
+    expect(mockAction).toBeCalledWith(state);
+  });
+
+  it('should reset component', () => {
+    const mockState = jest.fn();
+    var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />,
+      document.createElement('div'));
+    PayslipActions.download = jest.fn();
+
+    payslipForm.resetState = mockState;
+    payslipForm.handleDownloadClick();
+
+    expect(mockState).toBeCalled();
+  });
+});

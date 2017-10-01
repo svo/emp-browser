@@ -26,3 +26,30 @@ describe("during create", function() {
     expect(createPayslip).toHaveBeenCalled();
   });
 });
+
+describe("during download", function() {
+  it('should store payslip to be downloadd', () => {
+    var payslipStore = new PayslipStore();
+    var location = "coconuts";
+    const getInstance = jest.fn();
+    const downloadPayslip = jest.fn();
+    getInstance.mockReturnValue({downloadPayslip: downloadPayslip});
+    payslipStore.getInstance = getInstance;
+
+    payslipStore.download(location);
+
+    expect(payslipStore.location).toEqual(location);
+  });
+
+  it('should delegate to source', () => {
+    var payslipStore = new PayslipStore();
+    const getInstance = jest.fn();
+    const downloadPayslip = jest.fn();
+    getInstance.mockReturnValue({downloadPayslip: downloadPayslip});
+    payslipStore.getInstance = getInstance;
+
+    payslipStore.download("coconuts");
+
+    expect(downloadPayslip).toHaveBeenCalled();
+  });
+});

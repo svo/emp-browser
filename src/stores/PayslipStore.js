@@ -10,7 +10,8 @@ export class PayslipStore {
       this.registerAsync(PayslipSource);
       this.bindListeners({
         create: PayslipActions.CREATE,
-        created: PayslipActions.PAYSLIP_CREATED
+        created: PayslipActions.PAYSLIP_CREATED,
+        download: PayslipActions.DOWNLOAD
       });
     } catch (e) {
     }
@@ -23,6 +24,11 @@ export class PayslipStore {
 
   created(location) {
     this.payslip.location = location;
+  }
+
+  download(location) {
+    this.location = location;
+    this.getInstance().downloadPayslip();
   }
 }
 

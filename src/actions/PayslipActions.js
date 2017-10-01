@@ -1,4 +1,5 @@
 import names from 'date-names';
+import download from 'downloadjs';
 import alt from '../alt';
 
 class PayslipActions {
@@ -20,6 +21,17 @@ class PayslipActions {
   }
 
   payslipCreateFailed(error) {
+  }
+
+  download(state) {
+    return state.location;
+  }
+
+  payslipDownloaded(response) {
+    return download(response.data, 'payslip.pdf', 'application/pdf');
+  }
+
+  payslipDownloadFailed(error) {
   }
 }
 

@@ -14,13 +14,7 @@ class PayslipForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      first_name: "",
-      last_name: "",
-      annual_salary: 0,
-      month: this.props.now,
-      super_rate: 9
-    };
+    this.resetState();
 
     this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
     this.handleLastNameChange = this.handleLastNameChange.bind(this);
@@ -28,7 +22,19 @@ class PayslipForm extends Component {
     this.handleMonthChange = this.handleMonthChange.bind(this);
     this.handleSuperRateChange = this.handleSuperRateChange.bind(this);
     this.handleCreateClick = this.handleCreateClick.bind(this);
+    this.handleDownloadClick = this.handleDownloadClick.bind(this);
     this.onChange = this.onChange.bind(this);
+  }
+
+  resetState() {
+    this.state = {
+      first_name: "",
+      last_name: "",
+      annual_salary: 0,
+      month: this.props.now,
+      super_rate: 9,
+      location: undefined
+    };
   }
 
   getInitialState() {
@@ -116,6 +122,11 @@ class PayslipForm extends Component {
     PayslipActions.create(this.state);
   }
 
+  handleDownloadClick() {
+    PayslipActions.download(this.state);
+    this.resetState();
+  }
+
   render() {
     return (
       <form>
@@ -162,7 +173,7 @@ class PayslipForm extends Component {
             disabled={!this.valid()}>
             Create
           </Button>
-          <Button bsStyle="success" href={this.state.location}
+          <Button bsStyle="success" onClick={this.handleDownloadClick}
             disabled={this.state.location === undefined}>
             Download
           </Button>
