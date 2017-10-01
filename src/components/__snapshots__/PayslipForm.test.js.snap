@@ -79,7 +79,7 @@ exports[`renders correctly 1`] = `
       id="year"
       onChange={[Function]}
       type="month"
-      value="2017-10"
+      value="1976-04"
     />
   </div>
   <div
