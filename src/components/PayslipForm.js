@@ -14,7 +14,7 @@ class PayslipForm extends Component {
   constructor(props) {
     super(props);
 
-    this.resetState();
+    this.state = this.defaultState();
 
     this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
     this.handleLastNameChange = this.handleLastNameChange.bind(this);
@@ -26,8 +26,8 @@ class PayslipForm extends Component {
     this.onChange = this.onChange.bind(this);
   }
 
-  resetState() {
-    this.state = {
+  defaultState() {
+    return {
       first_name: "",
       last_name: "",
       annual_salary: 0,
@@ -124,7 +124,7 @@ class PayslipForm extends Component {
 
   handleDownloadClick() {
     PayslipActions.download(this.state);
-    this.resetState();
+    this.setState(this.defaultState());
   }
 
   render() {

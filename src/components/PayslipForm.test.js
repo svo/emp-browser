@@ -279,13 +279,17 @@ describe("on download", function() {
 
   it('should reset component', () => {
     const mockState = jest.fn();
+    const mockDefaultState = jest.fn();
+    const defaultState = {coconuts: true};
+    mockDefaultState.mockReturnValue(defaultState);
+    PayslipActions.download = jest.fn();
     var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />,
       document.createElement('div'));
-    PayslipActions.download = jest.fn();
+    payslipForm.defaultState = mockDefaultState;
+    payslipForm.setState = mockState;
 
-    payslipForm.resetState = mockState;
     payslipForm.handleDownloadClick();
 
-    expect(mockState).toBeCalled();
+    expect(mockState).toBeCalledWith(defaultState);
   });
 });
