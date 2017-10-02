@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormGroup, ControlLabel, FormControl, Button, ButtonGroup } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Button, ButtonGroup, Alert } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import format from 'date-format';
 import PayslipActions from '../actions/PayslipActions';
@@ -33,7 +33,8 @@ class PayslipForm extends Component {
       annual_salary: 0,
       month: this.props.now,
       super_rate: 9,
-      location: undefined
+      location: undefined,
+      error: undefined
     };
   }
 
@@ -50,7 +51,9 @@ class PayslipForm extends Component {
   }
 
   onChange(state) {
-    this.setState({location: state.payslip.location});
+    this.setState({location: state.payslip.location,
+      error: state.error
+    });
   }
 
   validFirstName() {
@@ -99,23 +102,33 @@ class PayslipForm extends Component {
   }
 
   handleFirstNameChange(e) {
-    this.setState({ first_name: e.target.value });
+    this.setState({first_name: e.target.value,
+      error: undefined
+    });
   }
 
   handleLastNameChange(e) {
-    this.setState({ last_name: e.target.value });
+    this.setState({last_name: e.target.value,
+      error: undefined
+    });
   }
 
   handleAnnualSalaryChange(e) {
-    this.setState({ annual_salary: e.target.value });
+    this.setState({annual_salary: e.target.value,
+      error: undefined
+    });
   }
 
   handleMonthChange(e) {
-    this.setState({ month: new Date(e.target.value) });
+    this.setState({month: new Date(e.target.value),
+      error: undefined
+    });
   }
 
   handleSuperRateChange(e) {
-    this.setState({ super_rate: e.target.value });
+    this.setState({super_rate: e.target.value,
+      error: undefined
+    });
   }
 
   handleCreateClick() {
@@ -128,6 +141,14 @@ class PayslipForm extends Component {
   }
 
   render() {
+    var error = undefined;
+
+    if (this.state.error !== undefined) {
+      error =
+        <Alert bsStyle="danger">
+          {this.state.error}
+        </Alert>
+    }
     return (
       <form>
         <FormGroup controlId="first_name" validationState={this.validFirstName()}>
@@ -178,6 +199,7 @@ class PayslipForm extends Component {
             Download
           </Button>
         </ButtonGroup>
+        {error}
       </form>
     );
   }

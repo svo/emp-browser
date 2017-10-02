@@ -55,6 +55,41 @@ describe("state", function() {
 
     expect(payslipForm.state.month).toEqual(now);
   });
+
+  it('should have correct location default', () => {
+    const div = document.createElement('div');
+
+    var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+
+    expect(payslipForm.state.location).toEqual(undefined);
+  });
+
+  it('should have correct error default', () => {
+    const div = document.createElement('div');
+
+    var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+
+    expect(payslipForm.state.error).toEqual(undefined);
+  });
+
+  it('should set location on change', () => {
+    const div = document.createElement('div');
+    const location = 'coconuts';
+    var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+
+    payslipForm.onChange({payslip: {location: location}});
+    expect(payslipForm.state.location).toEqual(location);
+  });
+
+  it('should set error on change', () => {
+    const div = document.createElement('div');
+    const error = 'bob';
+    var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+
+    payslipForm.onChange({payslip: {},
+      error: error});
+    expect(payslipForm.state.error).toEqual(error);
+  });
 });
 
 describe("validation", function() {
@@ -292,4 +327,127 @@ describe("on download", function() {
 
     expect(mockState).toBeCalledWith(defaultState);
   });
+});
+
+describe("change handling", function() {
+  describe("first name", function() {
+    it('should set first name', () => {
+      const div = document.createElement('div');
+      const newValue = 'coconuts';
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+
+      payslipForm.handleFirstNameChange({target: {value: newValue}});
+
+
+      expect(payslipForm.state.first_name).toEqual(newValue);
+    });
+
+    it('should reset error', () => {
+      const div = document.createElement('div');
+      const newValue = 'coconuts';
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+      payslipForm.setState({error: "bob"});
+
+      payslipForm.handleFirstNameChange({target: {value: newValue}});
+
+      expect(payslipForm.state.error).toEqual(undefined);
+    });
+  });
+
+  describe("last name", function() {
+    it('should set last name', () => {
+      const div = document.createElement('div');
+      const newValue = 'coconuts';
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+
+      payslipForm.handleLastNameChange({target: {value: newValue}});
+
+
+      expect(payslipForm.state.last_name).toEqual(newValue);
+    });
+
+    it('should reset error', () => {
+      const div = document.createElement('div');
+      const newValue = 'coconuts';
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+      payslipForm.setState({error: "bob"});
+
+      payslipForm.handleLastNameChange({target: {value: newValue}});
+
+      expect(payslipForm.state.error).toEqual(undefined);
+    });
+  });
+
+  describe("annual salary", function() {
+    it('should set annual salary', () => {
+      const div = document.createElement('div');
+      const newValue = '175000';
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+
+      payslipForm.handleAnnualSalaryChange({target: {value: newValue}});
+
+
+      expect(payslipForm.state.annual_salary).toEqual(newValue);
+    });
+
+    it('should reset error', () => {
+      const div = document.createElement('div');
+      const newValue = '175000';
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+      payslipForm.setState({error: "bob"});
+
+      payslipForm.handleAnnualSalaryChange({target: {value: newValue}});
+
+      expect(payslipForm.state.error).toEqual(undefined);
+    });
+  });
+
+  describe("month", function() {
+    it('should set month', () => {
+      const div = document.createElement('div');
+      const newValue = '1976-04';
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+
+      payslipForm.handleMonthChange({target: {value: newValue}});
+
+
+      expect(payslipForm.state.month).toEqual(new Date(newValue));
+    });
+
+    it('should reset error', () => {
+      const div = document.createElement('div');
+      const newValue = '1976-04';
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+      payslipForm.setState({error: "bob"});
+
+      payslipForm.handleMonthChange({target: {value: newValue}});
+
+      expect(payslipForm.state.error).toEqual(undefined);
+    });
+  });
+
+  describe("super rate", function() {
+    it('should set super rate', () => {
+      const div = document.createElement('div');
+      const newValue = '10';
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+
+      payslipForm.handleSuperRateChange({target: {value: newValue}});
+
+
+      expect(payslipForm.state.super_rate).toEqual(newValue);
+    });
+
+    it('should reset error', () => {
+      const div = document.createElement('div');
+      const newValue = '1976-04';
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+      payslipForm.setState({error: "bob"});
+
+      payslipForm.handleSuperRateChange({target: {value: newValue}});
+
+      expect(payslipForm.state.error).toEqual(undefined);
+    });
+  });
+
 });

@@ -60,3 +60,13 @@ it('should download payslip data', () => {
 it('should process download data', () => {
   expect(PayslipActions.payslipDownloaded({data: 'bob'})).toEqual('downloadjs-result');
 });
+
+it('should return error on create failure', () => {
+  const error = {message: 'bob'};
+  expect(PayslipActions.payslipCreateFailed(error)).toEqual(error);
+});
+
+it('should return error on download failure', () => {
+  const error = {message: 'bob'};
+  expect(PayslipActions.payslipDownloadFailed(error)).toEqual(error);
+});

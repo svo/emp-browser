@@ -21,6 +21,7 @@ class PayslipActions {
   }
 
   payslipCreateFailed(error) {
+    return error;
   }
 
   download(state) {
@@ -32,6 +33,7 @@ class PayslipActions {
   }
 
   payslipDownloadFailed(error) {
+    return error;
   }
 }
 
