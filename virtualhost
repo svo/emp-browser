@@ -1,7 +1,7 @@
 <VirtualHost *:80>
   DirectoryIndex index.html
 
-  DocumentRoot /var/www/html
+  DocumentRoot /var/www/localhost/htdocs
 
   ProxyPass /payslip http://emp:8080/payslip
   ProxyPassReverse /payslip http://emp:8080/payslip
