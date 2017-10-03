@@ -94,11 +94,21 @@ class PayslipForm extends Component {
     }
   }
 
+  validMonth() {
+    if (isNaN(this.state.month.getMonth()) ||
+      this.state.month < new Date('2012-07')) {
+      return 'error';
+    }
+
+    return 'success';
+  }
+
   valid() {
     return this.validSuperRate() === 'success' &&
       this.validAnnualSalary() === 'success' &&
       this.validFirstName() === 'success' &&
-      this.validLastName() === 'success';
+      this.validLastName() === 'success' &&
+      this.validMonth() === 'success';
   }
 
   handleFirstNameChange(e) {
@@ -175,11 +185,13 @@ class PayslipForm extends Component {
             onChange={this.handleAnnualSalaryChange} />
           <FormControl.Feedback />
         </FormGroup>
-        <FormGroup controlId="year">
+        <FormGroup controlId="month">
           <ControlLabel>Year</ControlLabel>
           <FormControl type="month"
             value={format('yyyy-MM', this.state.month)}
-            onChange={this.handleMonthChange} />
+            onChange={this.handleMonthChange}
+            min='2012-07'/>
+          <FormControl.Feedback />
         </FormGroup>
         <FormGroup controlId="super_rate" validationState={this.validSuperRate()}>
           <ControlLabel>Super Rate</ControlLabel>
@@ -187,7 +199,6 @@ class PayslipForm extends Component {
             placeholder="9"
             value={this.state.super_rate}
             onChange={this.handleSuperRateChange} />
-          <FormControl.Feedback />
         </FormGroup>
         <ButtonGroup>
           <Button bsStyle="primary" onClick={this.handleCreateClick}

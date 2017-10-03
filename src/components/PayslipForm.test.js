@@ -160,6 +160,22 @@ describe("validation", function() {
       expect(payslipForm.valid()).toEqual(false);
   });
 
+  it("should be invalid month valid", () => {
+      const div = document.createElement('div');
+
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+
+      payslipForm.setState({super_rate: 9,
+        annual_salary: 175000,
+        first_name: "Sean",
+        last_name: "Van Osselaer"});
+      const validMonth = jest.fn();
+      validMonth.mockReturnValue('error');
+      payslipForm.validMonth = validMonth;
+
+      expect(payslipForm.valid()).toEqual(false);
+  });
+
   describe("of first name", function() {
     it('should report invalid first name', () => {
       const div = document.createElement('div');
@@ -270,6 +286,32 @@ describe("validation", function() {
       payslipForm.setState({super_rate: "10"});
 
       expect(payslipForm.validSuperRate()).toEqual('success')
+    });
+  });
+
+  describe("of date", function() {
+    it('should report valid for July 2012', () => {
+      const div = document.createElement('div');
+
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date('2012-07')} />, div);
+
+      expect(payslipForm.validMonth()).toEqual('success');
+    });
+
+    it('should report invalid for June 2012', () => {
+      const div = document.createElement('div');
+
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date('2012-06')} />, div);
+
+      expect(payslipForm.validMonth()).toEqual('error');
+    });
+
+    it('should report invalid when no month supplied', () => {
+      const div = document.createElement('div');
+
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date(2017, NaN)} />, div);
+
+      expect(payslipForm.validMonth()).toEqual('error');
     });
   });
 });

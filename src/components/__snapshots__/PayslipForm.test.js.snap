@@ -66,24 +66,25 @@ exports[`renders correctly 1`] = `
     />
   </div>
   <div
-    className="form-group"
+    className="form-group has-feedback"
   >
     <label
       className="control-label"
-      htmlFor="year"
+      htmlFor="month"
     >
       Year
     </label>
     <input
       className="form-control"
-      id="year"
+      id="month"
+      min="2012-07"
       onChange={[Function]}
       type="month"
       value="1976-04"
     />
   </div>
   <div
-    className="form-group has-feedback has-success"
+    className="form-group has-success"
   >
     <label
       className="control-label"
@@ -98,9 +99,6 @@ exports[`renders correctly 1`] = `
       placeholder="9"
       type="number"
       value={9}
-    />
-    <span
-      className="form-control-feedback glyphicon glyphicon-ok"
     />
   </div>
   <div
