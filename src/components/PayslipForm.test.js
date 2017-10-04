@@ -241,6 +241,16 @@ describe("validation", function() {
       expect(payslipForm.validAnnualSalary()).toEqual('error')
     });
 
+    it('should report invalid annual salary for values great than integer', () => {
+      const div = document.createElement('div');
+
+      var payslipForm = ReactDOM.render(<PayslipForm now={new Date()} />, div);
+      payslipForm.setState({annual_salary: "2147483648"});
+
+      expect(payslipForm.validAnnualSalary()).toEqual('error')
+    });
+
+
     it('should report valid annual salary', () => {
       const div = document.createElement('div');
 

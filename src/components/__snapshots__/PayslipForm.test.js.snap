@@ -56,6 +56,8 @@ exports[`renders correctly 1`] = `
     <input
       className="form-control"
       id="annual_salary"
+      max="2147483647"
+      min="0"
       onChange={[Function]}
       placeholder="175000"
       type="number"
@@ -95,6 +97,8 @@ exports[`renders correctly 1`] = `
     <input
       className="form-control"
       id="super_rate"
+      max="50"
+      min="0"
       onChange={[Function]}
       placeholder="9"
       type="number"

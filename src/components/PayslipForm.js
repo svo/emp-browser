@@ -72,7 +72,8 @@ class PayslipForm extends Component {
     if (typeof value === 'number' &&
       isFinite(value) &&
       Math.floor(value) === value &&
-      value > 0) {
+      value > 0 &&
+      value <= 2147483647 ) {
 
       return 'success';
     } else {
@@ -181,6 +182,8 @@ class PayslipForm extends Component {
           <ControlLabel>Annual Salary</ControlLabel>
           <FormControl type="number"
             placeholder="175000"
+            max="2147483647"
+            min="0"
             value={this.state.annual_salary}
             onChange={this.handleAnnualSalaryChange} />
           <FormControl.Feedback />
@@ -197,6 +200,8 @@ class PayslipForm extends Component {
           <ControlLabel>Super Rate</ControlLabel>
           <FormControl type="number"
             placeholder="9"
+            max="50"
+            min="0"
             value={this.state.super_rate}
             onChange={this.handleSuperRateChange} />
         </FormGroup>
