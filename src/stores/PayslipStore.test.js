@@ -1,9 +1,9 @@
 import { PayslipStore } from './PayslipStore';
 
-describe("during create", function() {
+describe('during create', function() {
   it('should store payslip to be created', () => {
-    var payslipStore = new PayslipStore();
-    var payslip = "coconuts";
+    const payslipStore = new PayslipStore();
+    const payslip = 'coconuts';
     const getInstance = jest.fn();
     const createPayslip = jest.fn();
     getInstance.mockReturnValue({createPayslip: createPayslip});
@@ -15,19 +15,19 @@ describe("during create", function() {
   });
 
   it('should delegate to source', () => {
-    var payslipStore = new PayslipStore();
+    const payslipStore = new PayslipStore();
     const getInstance = jest.fn();
     const createPayslip = jest.fn();
     getInstance.mockReturnValue({createPayslip: createPayslip});
     payslipStore.getInstance = getInstance;
 
-    payslipStore.create("coconuts");
+    payslipStore.create('coconuts');
 
     expect(createPayslip).toHaveBeenCalled();
   });
 
   it('should set payslip', () => {
-    var payslipStore = new PayslipStore();
+    const payslipStore = new PayslipStore();
     const getInstance = jest.fn();
     const createPayslip = jest.fn();
     const payslip = {coconuts: true};
@@ -40,20 +40,20 @@ describe("during create", function() {
   });
 
   it('should reset error state', () => {
-    var payslipStore = new PayslipStore();
+    const payslipStore = new PayslipStore();
     const getInstance = jest.fn();
     const createPayslip = jest.fn();
     getInstance.mockReturnValue({createPayslip: createPayslip});
     payslipStore.getInstance = getInstance;
 
-    payslipStore.create("coconuts");
+    payslipStore.create('coconuts');
 
     expect(payslipStore.error).toEqual(undefined);
   });
 
   it('should set error to message on failure', () => {
     const message = 'coconuts';
-    var payslipStore = new PayslipStore();
+    const payslipStore = new PayslipStore();
 
     payslipStore.createFailed({message: message});
 
@@ -61,10 +61,10 @@ describe("during create", function() {
   });
 });
 
-describe("during download", function() {
+describe('during download', function() {
   it('should store payslip to be downloadd', () => {
-    var payslipStore = new PayslipStore();
-    var location = "coconuts";
+    const payslipStore = new PayslipStore();
+    const location = 'coconuts';
     const getInstance = jest.fn();
     const downloadPayslip = jest.fn();
     getInstance.mockReturnValue({downloadPayslip: downloadPayslip});
@@ -76,20 +76,20 @@ describe("during download", function() {
   });
 
   it('should delegate to source', () => {
-    var payslipStore = new PayslipStore();
+    const payslipStore = new PayslipStore();
     const getInstance = jest.fn();
     const downloadPayslip = jest.fn();
     getInstance.mockReturnValue({downloadPayslip: downloadPayslip});
     payslipStore.getInstance = getInstance;
 
-    payslipStore.download("coconuts");
+    payslipStore.download('coconuts');
 
     expect(downloadPayslip).toHaveBeenCalled();
   });
 
   it('should set location', () => {
-    var payslipStore = new PayslipStore();
-    const location = "coconuts";
+    const payslipStore = new PayslipStore();
+    const location = 'coconuts';
     const getInstance = jest.fn();
     const downloadPayslip = jest.fn();
     getInstance.mockReturnValue({downloadPayslip: downloadPayslip});
@@ -102,7 +102,7 @@ describe("during download", function() {
 
   it('should set error to message on failure', () => {
     const message = 'coconuts';
-    var payslipStore = new PayslipStore();
+    const payslipStore = new PayslipStore();
 
     payslipStore.downloadFailed({message: message});
 

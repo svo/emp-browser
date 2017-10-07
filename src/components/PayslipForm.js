@@ -27,15 +27,13 @@ class PayslipForm extends Component {
   }
 
   defaultState() {
-    return {
-      first_name: "",
-      last_name: "",
+    return {first_name: '',
+      last_name: '',
       annual_salary: 0,
       month: this.props.now,
       super_rate: 9,
       location: undefined,
-      error: undefined
-    };
+      error: undefined};
   }
 
   getInitialState() {
@@ -51,9 +49,7 @@ class PayslipForm extends Component {
   }
 
   onChange(state) {
-    this.setState({location: state.payslip.location,
-      error: state.error
-    });
+    this.setState({location: state.payslip.location, error: state.error});
   }
 
   validFirstName() {
@@ -67,14 +63,13 @@ class PayslipForm extends Component {
   }
 
   validAnnualSalary() {
-    var value = parseFloat(this.state.annual_salary);
+    const value = parseFloat(this.state.annual_salary);
 
     if (typeof value === 'number' &&
       isFinite(value) &&
       Math.floor(value) === value &&
       value > 0 &&
-      value <= 2147483647 ) {
-
+      value <= 2147483647) {
       return 'success';
     } else {
       return 'error';
@@ -82,13 +77,12 @@ class PayslipForm extends Component {
   }
 
   validSuperRate() {
-    var value = parseFloat(this.state.super_rate);
+    const value = parseFloat(this.state.super_rate);
 
     if (typeof value === 'number' &&
       isFinite(value) &&
       value >= 0 &&
       value <= 50) {
-
       return 'success';
     } else {
       return 'error';
