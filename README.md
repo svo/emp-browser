@@ -1,9 +1,18 @@
 # EMP Browser
 
-* [Trello Board](https://trello.com/b/WoAzNyra/)
+The purpose of this project is to provide a browser renderable client for the `EMP` project.
+
+Main Project Repository:
+
+* [Server](https://github.com/svo/emp)
+
+Continuous Integration:
+
 * [Continuous Integration](https://app.shippable.com/github/svo/emp-browser/dashboard)
 
-__NOTE:__ this project uses git submodules so you will want to clone recursively to have all expected behaviours.
+[Trello Board](https://trello.com/b/WoAzNyra/)
+
+__NOTE:__ this project uses git submodules so you will want to clone recursively to have all expected behaviours. Additionally the submodules are using the `git` protocol so you will need your `SSH` key setup on `github` also.
 
 ```
 git clone --recursive git@github.com:svo/emp-browser.git
